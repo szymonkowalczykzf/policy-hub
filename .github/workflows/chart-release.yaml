@@ -57,14 +57,18 @@ jobs:
           helm dependency update
 
       - name: Run chart-releaser
-        id: chart-release
+        id: chart
         uses: helm/chart-releaser-action@v1.4.1
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
 
-      - name: Push git tag for release workflow to be triggered
-        uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
-        with:
-          tag: v${{ steps.chart-release.outputs.chart_version }}
-        if: ${{ steps.chart-release.outputs.changed_charts }}
+      - name: Latest release
+        run: |
+          echo "Latest release: ${{ steps.chart.outputs.chart_version }}"
+          echo "Changed charts: ${{ steps.chart.outputs.changed_charts }}"
+
+      # - name: Push git tag for release workflow to be triggered
+      #   uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
+      #   with:
+      #     tag: v${{ steps.release.outputs.chart_version }}

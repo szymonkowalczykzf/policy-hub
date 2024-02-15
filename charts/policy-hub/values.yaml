@@ -17,6 +17,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ###############################################################
 
+# Test comment
 # -- Provide centralidp base address (CX IAM), without trailing '/auth'.
 centralidpAddress: "https://centralidp.example.org"
 
